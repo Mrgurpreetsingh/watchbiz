@@ -141,7 +141,6 @@ export async function createBrand(formData: FormData): Promise<ActionResult<stri
       data: {
         name: validatedData.name,
         slug: validatedData.slug,
-        description: validatedData.description || null,
         logo: validatedData.logo || null
       }
     })
@@ -211,7 +210,6 @@ export async function updateBrand(
       data: {
         name: validatedData.name,
         slug: validatedData.slug,
-        description: validatedData.description || null,
         logo: validatedData.logo || null
       }
     })
