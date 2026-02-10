@@ -128,8 +128,8 @@ async function getSimilarProducts(productId: string, categoryId: string, limit =
     where: {
       categoryId,
       id: { not: productId }, // Exclure le produit actuel
-      status: 'ACTIVE',
-      stock: { gt: 0 }, // Seulement produits en stock
+      isActive: true,
+      quantity: { gt: 0 }, // Seulement produits en stock
     },
     include: {
       brand: true,
