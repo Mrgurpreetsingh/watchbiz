@@ -83,3 +83,7 @@ UPLOADTHING_SETUP.md
 
 # Claude Code configuration and memory
 .claude/
+
+# Windows batch scripts (local utilities)
+*.bat
+nul
