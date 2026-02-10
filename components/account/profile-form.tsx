@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { updateProfile } from '@/actions/profile'
-import { Loader2, Save, Upload } from 'lucide-react'
+import { AvatarUpload } from './avatar-upload'
+import { Loader2, Save } from 'lucide-react'
 
 interface ProfileFormProps {
   user: Pick<User, 'id' | 'name' | 'email' | 'phone' | 'image'>
@@ -21,6 +22,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(user.image)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -46,32 +48,17 @@ export function ProfileForm({ user }: ProfileFormProps) {
       {/* Avatar */}
       <div>
         <Label>Photo de profil</Label>
-        <div className="flex items-center gap-4 mt-2">
-          {/* Avatar preview */}
-          <div className="h-20 w-20 rounded-full bg-slate-light flex items-center justify-center overflow-hidden">
-            {user.image ? (
-              <img
-                src={user.image}
-                alt={user.name || 'Avatar'}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <Upload className="h-8 w-8 text-slate-mid" />
-            )}
-          </div>
-
-          {/* URL input (simple pour MVP, remplacer par upload Cloudinary plus tard) */}
-          <div className="flex-1">
-            <Input
-              type="url"
-              name="image"
-              placeholder="URL de l'avatar (https://...)"
-              defaultValue={user.image || ''}
-            />
-            <p className="text-xs text-slate-mid mt-1">
-              Pour l'instant, entrez une URL d'image. Upload de fichier sera ajouté plus tard.
-            </p>
-          </div>
+        <div className="mt-2">
+          <AvatarUpload
+            currentImage={avatarUrl}
+            onUploadComplete={(url) => {
+              setAvatarUrl(url)
+              setSuccess(true)
+              setTimeout(() => setSuccess(false), 3000)
+            }}
+          />
+          {/* Hidden input pour envoyer l'URL dans le form */}
+          <input type="hidden" name="image" value={avatarUrl || ''} />
         </div>
       </div>
 

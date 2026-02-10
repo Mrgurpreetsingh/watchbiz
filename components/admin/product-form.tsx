@@ -195,7 +195,7 @@ export function ProductForm({ product, categories, brands, mode }: ProductFormPr
               id="stock"
               name="stock"
               type="number"
-              defaultValue={product?.stock || 0}
+              defaultValue={product?.quantity || 0}
               placeholder="10"
               required
               disabled={isPending}

@@ -11,23 +11,24 @@ datasource db {
 
 // User & Authentication
 model User {
-  id            String     @id @default(cuid())
-  name          String?
-  email         String     @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?
-  phone         String?
-  role          UserRole   @default(USER)
-  isBlocked     Boolean    @default(false)
-  accounts      Account[]
-  sessions      Session[]
-  orders        Order[]
-  reviews       Review[]
-  addresses     Address[]
-  wishlist      Wishlist[]
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  id                 String                 @id @default(cuid())
+  name               String?
+  email              String                 @unique
+  emailVerified      DateTime?
+  image              String?
+  password           String?
+  phone              String?
+  role               UserRole               @default(USER)
+  isBlocked          Boolean                @default(false)
+  accounts           Account[]
+  sessions           Session[]
+  orders             Order[]
+  reviews            Review[]
+  addresses          Address[]
+  wishlist           Wishlist[]
+  passwordResetTokens PasswordResetToken[]
+  createdAt          DateTime               @default(now())
+  updatedAt          DateTime               @updatedAt
 }
 
 enum UserRole {
@@ -70,6 +71,18 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expires   DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([token])
+}
+
 // Products & Categories
 model Category {
   id          String    @id @default(cuid())
@@ -83,13 +96,14 @@ model Category {
 }
 
 model Brand {
-  id        String    @id @default(cuid())
-  name      String    @unique
-  slug      String    @unique
-  logo      String?
-  products  Product[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?   @db.Text
+  logo        String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model Product {

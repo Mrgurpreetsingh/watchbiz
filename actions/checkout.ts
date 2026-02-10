@@ -227,10 +227,10 @@ export async function createOrderFromStripe(
         return { success: false, error: `Produit introuvable: ${item.name}` }
       }
 
-      if (product.stock < item.quantity) {
+      if (product.quantity < item.quantity) {
         return {
           success: false,
-          error: `Stock insuffisant pour ${product.name} (disponible: ${product.stock}, demandé: ${item.quantity})`
+          error: `Stock insuffisant pour ${product.name} (disponible: ${product.quantity}, demandé: ${item.quantity})`
         }
       }
     }

@@ -214,14 +214,14 @@ export default async function AdminProductsPage({ searchParams }: AdminProductsP
                     <td className="p-4">
                       <Badge
                         className={
-                          product.stock > 10
+                          product.quantity > 10
                             ? 'bg-green-100 text-green-800 border-green-200'
-                            : product.stock > 0
+                            : product.quantity > 0
                             ? 'bg-yellow-100 text-yellow-800 border-yellow-200'
                             : 'bg-red-100 text-red-800 border-red-200'
                         }
                       >
-                        {product.stock} unités
+                        {product.quantity} unités
                       </Badge>
                     </td>
                     <td className="p-4">

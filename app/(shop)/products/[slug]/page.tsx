@@ -194,7 +194,7 @@ export default async function ProductDetailPage({
           priceCurrency: 'EUR',
           price: product.price,
           availability:
-            product.stock > 0
+            product.quantity > 0
               ? 'https://schema.org/InStock'
               : 'https://schema.org/OutOfStock',
           priceValidUntil: new Date(

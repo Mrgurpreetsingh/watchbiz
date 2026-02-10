@@ -65,7 +65,7 @@ export async function getAdminProducts(filters: GetAdminProductsFilters = {}) {
 
     // Low stock filter (< 10)
     if (filters.lowStock) {
-      where.stock = { lt: 10 }
+      where.quantity = { lt: 10 }
     }
 
     const products = await prisma.product.findMany({

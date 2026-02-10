@@ -57,6 +57,23 @@ export const ourFileRouter = {
     .onUploadComplete(async ({ metadata, file }) => {
       console.log('Brand logo uploaded:', file.url, 'by user:', metadata.userId)
       return { url: file.url }
+    }),
+
+  // User avatar uploader (all authenticated users)
+  userAvatar: f({ image: { maxFileSize: '2MB', maxFileCount: 1 } })
+    .middleware(async () => {
+      const session = await auth()
+
+      // Only authenticated users can upload avatars
+      if (!session?.user) {
+        throw new Error('Non authentifié')
+      }
+
+      return { userId: session.user.id }
+    })
+    .onUploadComplete(async ({ metadata, file }) => {
+      console.log('Avatar uploaded:', file.url, 'by user:', metadata.userId)
+      return { url: file.url }
     })
 } satisfies FileRouter
 
