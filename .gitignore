@@ -1,0 +1,85 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+/test-results
+/playwright-report
+/.auth
+*.spec.ts-snapshots
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env files (contains credentials - NEVER commit)
+.env
+.env*.local
+.env.production
+.env.test
+.env.docker
+
+# kubernetes secrets (use secrets.example.yaml as template)
+k8s/base/secrets.yaml
+k8s/overlays/*/secrets.yaml
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# prisma
+# Les migrations doivent être versionnées (ne pas ignorer !)
+
+# backups (ne pas versionner les sauvegardes)
+/backups
+*.sql
+
+# personal guides and documentation (not shared)
+# Root .md files (except README.md which is kept)
+ARCHITECTURE.md
+AUTHENTICATION.md
+BACKEND-EXPLAINED.md
+CI-CD-SETUP-SUMMARY.md
+DATABASE.md
+DEVOPS.md
+GUIDE-DEBUTANT.md
+IMAGES.md
+MIGRATIONS.md
+PWA_SETUP.md
+RESEND_SETUP.md
+STRIPE_SETUP.md
+TODO.md
+UPLOADTHING_SETUP.md
+
+# Keep important documentation:
+# ✅ README.md (root)
+# ✅ docs/*.md (CI/CD, deployment guides)
+# ✅ .github/workflows/README.md
+# ✅ scripts/README.md
+
+# Claude Code configuration and memory
+.claude/
