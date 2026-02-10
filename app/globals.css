@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * 🎨 WatchBiz Design System - Charte Graphique Luxe Horloger
+ *
+ * Palette : Or Champagne + Noir Profond + Gris Ardoise
+ * Typographie : Playfair Display (headings) + Inter (body) + Cormorant Garamond (accent)
+ * Accessibilité : Contrastes WCAG AA validés
+ */
+
+@layer base {
+  :root {
+    /* === Couleurs Luxe === */
+    /* Noir & Gris */
+    --luxury-black: 15 15 15; /* #0f0f0f - Élégance sophistication */
+    --onyx: 25 25 25; /* #191919 - Noir profond */
+    --slate-premium: 210 20% 25%; /* #333D4D - Neutralité premium */
+    --slate-mid: 210 15% 50%; /* #6B758C - Texte secondaire */
+    --slate-light: 210 20% 92%; /* #E8EDF2 - Backgrounds subtils */
+
+    /* Or Champagne - Prestige & Raffinement */
+    --gold-champagne: 43 56% 58%; /* #D4AF37 - Or principal */
+    --gold-light: 43 65% 70%; /* #E8C87C - Or clair hover */
+    --gold-dark: 43 48% 45%; /* #B8941E - Or foncé actif */
+
+    /* Blanc & Ivoire */
+    --ivory: 40 25% 98%; /* #F9F8F6 - Blanc cassé backgrounds */
+    --white-pure: 0 0% 100%; /* #FFFFFF - Blanc pur */
+
+    /* Accents */
+    --ruby-red: 0 65% 45%; /* #C32F2F - Badges "Nouveau" */
+    --emerald-green: 160 70% 35%; /* #1B8557 - Badge "En stock" */
+
+    /* === Semantic Colors (Tailwind) === */
+    --background: var(--ivory);
+    --foreground: var(--luxury-black);
+    --primary: var(--onyx);
+    --primary-foreground: var(--ivory);
+    --secondary: var(--slate-light);
+    --secondary-foreground: var(--slate-premium);
+    --accent: var(--gold-champagne);
+    --accent-foreground: var(--luxury-black);
+    --muted: var(--slate-light);
+    --muted-foreground: var(--slate-mid);
+    --border: 210 20% 88%; /* Bordures subtiles */
+    --input: 210 20% 88%;
+    --ring: var(--gold-champagne); /* Focus ring or champagne */
+
+    /* === Spacing Scale (8px base) === */
+    --spacing-xs: 0.25rem; /* 4px */
+    --spacing-sm: 0.5rem;  /* 8px */
+    --spacing-md: 1rem;    /* 16px */
+    --spacing-lg: 1.5rem;  /* 24px */
+    --spacing-xl: 2rem;    /* 32px */
+    --spacing-2xl: 3rem;   /* 48px */
+    --spacing-3xl: 4rem;   /* 64px */
+
+    /* === Border Radius === */
+    --radius-sm: 0.25rem;  /* 4px - Subtle */
+    --radius-md: 0.5rem;   /* 8px - Cards */
+    --radius-lg: 0.75rem;  /* 12px - Modals */
+    --radius: var(--radius-md);
+
+    /* === Shadows - Subtle Luxury === */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+    /* === Typography === */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-accent: 'Cormorant Garamond', serif;
+
+    /* === Transitions === */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* === Dark Mode === */
+  .dark {
+    --background: var(--luxury-black);
+    --foreground: var(--ivory);
+    --primary: var(--gold-champagne);
+    --primary-foreground: var(--luxury-black);
+    --secondary: var(--slate-premium);
+    --secondary-foreground: var(--slate-light);
+    --accent: var(--gold-light);
+    --accent-foreground: var(--luxury-black);
+    --muted: var(--slate-premium);
+    --muted-foreground: var(--slate-mid);
+    --border: 210 20% 20%;
+    --input: 210 20% 20%;
+    --ring: var(--gold-light);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* === Hiérarchie Typographique === */
+  h1 {
+    @apply font-heading text-4xl font-bold leading-tight tracking-tight md:text-5xl;
+  }
+
+  h2 {
+    @apply font-heading text-3xl font-semibold leading-tight tracking-tight md:text-4xl;
+  }
+
+  h3 {
+    @apply font-heading text-2xl font-semibold leading-snug md:text-3xl;
+  }
+
+  h4 {
+    @apply font-body text-xl font-semibold leading-snug;
+  }
+
+  /* === Classes Utilitaires Fonts === */
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  .font-accent {
+    font-family: var(--font-accent);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* === Animations Utilities === */
+  .transition-fast {
+    transition-duration: var(--transition-fast);
+  }
+
+  .transition-base {
+    transition-duration: var(--transition-base);
+  }
+
+  .transition-slow {
+    transition-duration: var(--transition-slow);
+  }
+}
