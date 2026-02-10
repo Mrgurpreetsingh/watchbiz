@@ -135,7 +135,15 @@ Le schéma Prisma inclut :
 
 ## 🔐 Variables d'Environnement
 
-Voir [.env.example](.env.example) pour la liste complète.
+Copiez `.env.example` vers `.env.local` et configurez vos propres valeurs:
+
+```bash
+cp .env.example .env.local
+```
+
+**⚠️ Important:** Les fichiers `.env.local`, `.env`, etc. contiennent vos credentials et sont **automatiquement ignorés par git**. Seul `.env.example` (qui est un template) est versionné.
+
+Voir [.env.example](.env.example) pour la liste complète des variables requises.
 
 ## 🤝 Contribution
 
@@ -143,7 +151,9 @@ Ce projet est un portfolio personnel démontrant des compétences fullstack mode
 
 ## 📝 License
 
-MIT
+© 2026 Mrgurpreetsingh - Projet Portfolio Personnel
+
+Ce projet est développé à des fins éducatives et de démonstration de compétences.
 
 ---
 
