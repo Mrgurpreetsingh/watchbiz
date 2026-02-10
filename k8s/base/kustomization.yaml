@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: watchbiz
+
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - secrets.yaml
+  - postgres-deployment.yaml
+  - redis-deployment.yaml
+  - app-deployment.yaml
+  - ingress.yaml
+
+# Labels communes
+commonLabels:
+  app: watchbiz
+  managed-by: kustomize
+
+# Annotations communes
+commonAnnotations:
+  version: "1.0.0"

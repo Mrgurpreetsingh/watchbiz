@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: watchbiz
+
+bases:
+  - ../../base
+
+namePrefix: prod-
+
+# Config spécifique production
+configMapGenerator:
+  - name: watchbiz-config
+    behavior: merge
+    literals:
+      - NODE_ENV=production
+
+# Haute disponibilité en prod
+replicas:
+  - name: watchbiz-app
+    count: 5
+  - name: postgres
+    count: 1 # Utiliser un service géré en prod (Cloud SQL, RDS, etc.)
+  - name: redis
+    count: 1 # Utiliser un service géré en prod (ElastiCache, MemoryStore, etc.)
+
+# Patches pour production
+patchesStrategicMerge:
+  - deployment-patch.yaml

@@ -1,0 +1,136 @@
+# Codecov Configuration
+# https://docs.codecov.com/docs/codecov-yaml
+
+codecov:
+  # Require CI to pass for coverage to be uploaded
+  require_ci_to_pass: yes
+
+  # Notify settings
+  notify:
+    # Wait for all CI builds before sending notification
+    wait_for_ci: yes
+
+# Coverage targets and thresholds
+coverage:
+  precision: 2
+  round: down
+  range: "70...100"
+
+  status:
+    # Overall project coverage
+    project:
+      default:
+        target: 70%
+        threshold: 2%
+        base: auto
+        if_ci_failed: error
+
+    # PR diff coverage (new code)
+    patch:
+      default:
+        target: 75%
+        threshold: 5%
+        base: auto
+        if_ci_failed: error
+
+    # Individual file changes
+    changes:
+      default:
+        target: 80%
+        threshold: 5%
+        base: auto
+
+# Comment on PRs with coverage report
+comment:
+  layout: "reach,diff,flags,tree,footer"
+  behavior: default
+  require_changes: false
+  require_base: yes
+  require_head: yes
+  branches:
+    - main
+    - develop
+
+# Ignore certain files/directories from coverage
+ignore:
+  - "tests/**/*"
+  - "**/*.test.ts"
+  - "**/*.test.tsx"
+  - "**/*.spec.ts"
+  - "**/*.config.ts"
+  - "**/*.config.js"
+  - ".next/**/*"
+  - "node_modules/**/*"
+  - "coverage/**/*"
+  - "playwright-report/**/*"
+  - "public/**/*"
+  - "prisma/seed.ts"
+  - "scripts/**/*"
+  - "*.d.ts"
+
+# Flag management for different test types
+flags:
+  unittests:
+    paths:
+      - "actions/"
+      - "lib/"
+      - "app/api/"
+    carryforward: true
+
+  integrationtests:
+    paths:
+      - "actions/"
+      - "lib/"
+    carryforward: true
+
+# Custom behavior for specific files
+component_management:
+  individual_components:
+    # Critical Server Actions - higher thresholds
+    - component_id: auth
+      name: Authentication
+      paths:
+        - "actions/auth.ts"
+        - "lib/auth.ts"
+      thresholds:
+        target: 85%
+
+    - component_id: checkout
+      name: Checkout & Payments
+      paths:
+        - "actions/checkout.ts"
+        - "app/api/webhooks/stripe/**"
+      thresholds:
+        target: 85%
+
+    - component_id: orders
+      name: Order Management
+      paths:
+        - "actions/orders.ts"
+        - "actions/admin-orders.ts"
+      thresholds:
+        target: 80%
+
+    - component_id: admin
+      name: Admin Operations
+      paths:
+        - "actions/admin-*.ts"
+      thresholds:
+        target: 80%
+
+    # Lower priority components
+    - component_id: ui
+      name: UI Components
+      paths:
+        - "components/**"
+      thresholds:
+        target: 60%
+
+# GitHub Checks integration
+github_checks:
+  annotations: true
+
+# Pull request annotations
+annotations:
+  - type: coverage
+    threshold: 80%
