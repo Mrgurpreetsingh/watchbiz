@@ -66,7 +66,7 @@ export async function updateUserRole(
 // TOGGLE USER BLOCK (Admin)
 // ============================================
 
-export async function toggleUserBlock(userId: string): Promise<ActionResult> {
+export async function toggleUserBlock(userId: string): Promise<ActionResult<boolean>> {
   try {
     // 1. Vérifier auth admin
     const session = await auth()

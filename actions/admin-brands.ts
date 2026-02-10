@@ -25,7 +25,6 @@ export interface ActionResult<T = void> {
 const brandSchema = z.object({
   name: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
   slug: z.string().min(2, 'Le slug doit contenir au moins 2 caractères'),
-  description: z.string().optional(),
   logo: z.string().url('URL du logo invalide').optional().or(z.literal(''))
 })
 
@@ -121,7 +120,6 @@ export async function createBrand(formData: FormData): Promise<ActionResult<stri
     const data = {
       name: formData.get('name') as string,
       slug: formData.get('slug') as string,
-      description: formData.get('description') as string,
       logo: formData.get('logo') as string
     }
 
@@ -187,7 +185,6 @@ export async function updateBrand(
     const data = {
       name: formData.get('name') as string,
       slug: formData.get('slug') as string,
-      description: formData.get('description') as string,
       logo: formData.get('logo') as string
     }
 

@@ -220,7 +220,7 @@ export async function createOrderFromStripe(
     for (const item of items) {
       const product = await prisma.product.findUnique({
         where: { id: item.productId },
-        select: { stock: true, name: true }
+        select: { quantity: true, name: true }
       })
 
       if (!product) {
@@ -266,7 +266,7 @@ export async function createOrderFromStripe(
         await tx.product.update({
           where: { id: item.productId },
           data: {
-            stock: {
+            quantity: {
               decrement: item.quantity
             }
           }
