@@ -116,3 +116,24 @@ export function Dialog({
 
   return createPortal(content, document.body)
 }
+
+// Additional exports for compatibility with shadcn/ui patterns
+export const DialogContent = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+  <div className={cn('p-6', className)}>{children}</div>
+)
+
+export const DialogHeader = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+  <div className={cn('mb-4', className)}>{children}</div>
+)
+
+export const DialogTitle = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+  <h2 className={cn('text-lg font-semibold', className)}>{children}</h2>
+)
+
+export const DialogDescription = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+  <p className={cn('text-sm text-slate-600', className)}>{children}</p>
+)
+
+export const DialogFooter = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+  <div className={cn('flex justify-end gap-2 mt-4', className)}>{children}</div>
+)
