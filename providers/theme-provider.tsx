@@ -114,11 +114,7 @@ export function ThemeProvider({
     setTheme(newTheme)
   }
 
-  // Éviter le flash de contenu (FOUC) côté serveur
-  if (!mounted) {
-    return <>{children}</>
-  }
-
+  // Toujours fournir le context, même avant le montage
   return (
     <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, toggleTheme }}>
       {children}
