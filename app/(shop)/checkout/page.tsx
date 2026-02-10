@@ -20,17 +20,18 @@ export default async function CheckoutPage() {
   return (
     <PageTransition>
       <div className="min-h-screen bg-ivory">
-      <div className="container mx-auto px-4 py-12">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="font-heading text-4xl font-bold mb-2">Paiement</h1>
-          <p className="text-slate-mid">
-            Complétez votre commande en toute sécurité
-          </p>
-        </div>
+        <div className="container mx-auto px-4 py-12">
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="font-heading text-4xl font-bold mb-2">Paiement</h1>
+            <p className="text-slate-mid">
+              Complétez votre commande en toute sécurité
+            </p>
+          </div>
 
-        {/* Checkout Form */}
-        <CheckoutForm />
+          {/* Checkout Form */}
+          <CheckoutForm />
+        </div>
       </div>
     </PageTransition>
   )

@@ -21,6 +21,7 @@ import { ScrollReveal } from '@/components/animations/scroll-reveal'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ProductViewTracker } from '@/components/products/product-view-tracker'
 import { RecentlyViewed } from '@/components/products/recently-viewed'
+import { ProductGrid } from '@/components/products/product-grid'
 
 // Lazy load reviews section (en bas de page, non critique)
 const ProductReviewsSection = dynamic(
@@ -121,6 +122,31 @@ async function getProduct(slug: string) {
   })
 }
 
+// Fetch similar products (même catégorie, exclure produit actuel)
+async function getSimilarProducts(productId: string, categoryId: string, limit = 4) {
+  return await prisma.product.findMany({
+    where: {
+      categoryId,
+      id: { not: productId }, // Exclure le produit actuel
+      status: 'ACTIVE',
+      stock: { gt: 0 }, // Seulement produits en stock
+    },
+    include: {
+      brand: true,
+      category: true,
+      reviews: {
+        select: {
+          rating: true,
+        },
+      },
+    },
+    take: limit,
+    orderBy: {
+      createdAt: 'desc', // Produits les plus récents
+    },
+  })
+}
+
 export default async function ProductDetailPage({
   params,
 }: ProductDetailPageProps) {
@@ -131,6 +157,9 @@ export default async function ProductDetailPage({
   if (!product) {
     notFound()
   }
+
+  // Récupérer les produits similaires
+  const similarProducts = await getSimilarProducts(product.id, product.categoryId, 4)
 
   // Parse specifications (JSON to object)
   const specifications = product.specifications as Record<string, string> | null
@@ -271,17 +300,19 @@ export default async function ProductDetailPage({
           <RecentlyViewed currentProductId={product.id} maxItems={4} />
         </ScrollReveal>
 
-        {/* Produits Similaires - À implémenter plus tard */}
-        {/* <div className="container mx-auto px-4">
-          <ScrollReveal direction="up" delay={1}>
-            <div className="mb-16">
-              <h2 className="mb-8 font-heading text-3xl font-semibold text-luxury-black">
-                Vous aimerez aussi
-              </h2>
-              <ProductGrid products={relatedProducts} columns={4} />
-            </div>
-          </ScrollReveal>
-        </div> */}
+        {/* Produits Similaires */}
+        {similarProducts.length > 0 && (
+          <div className="container mx-auto px-4 mt-16">
+            <ScrollReveal direction="up" delay={1}>
+              <div className="mb-16">
+                <h2 className="mb-8 font-heading text-3xl font-semibold text-luxury-black dark:text-white">
+                  Vous aimerez aussi
+                </h2>
+                <ProductGrid products={similarProducts} />
+              </div>
+            </ScrollReveal>
+          </div>
+        )}
       </div>
     </PageTransition>
   )

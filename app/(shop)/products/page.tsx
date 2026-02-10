@@ -94,6 +94,7 @@ export default async function ProductsPage() {
           </ScrollReveal>
         )}
       </div>
+      </div>
     </PageTransition>
   )
 }

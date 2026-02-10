@@ -177,6 +177,7 @@ export default async function BrandsPage() {
           </div>
         </div>
       </section>
+      </div>
     </PageTransition>
   );
 }

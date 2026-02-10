@@ -12,7 +12,6 @@ const RevenueChart = dynamic(
   () => import('@/components/admin/revenue-chart').then(mod => ({ default: mod.RevenueChart })),
   {
     loading: () => <Skeleton className="w-full h-[300px]" />,
-    ssr: false, // Désactiver SSR pour Recharts (problème de hydration)
   }
 )
 

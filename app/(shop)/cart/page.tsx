@@ -16,9 +16,10 @@ export default function CartPage() {
   return (
     <PageTransition>
       <div className="min-h-screen bg-ivory">
-      <div className="container mx-auto px-4 py-12">
-        <h1 className="font-heading text-4xl font-bold mb-8">Mon Panier</h1>
-        <CartPageContent />
+        <div className="container mx-auto px-4 py-12">
+          <h1 className="font-heading text-4xl font-bold mb-8">Mon Panier</h1>
+          <CartPageContent />
+        </div>
       </div>
     </PageTransition>
   )
