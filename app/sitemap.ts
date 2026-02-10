@@ -47,7 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 2. Pages produits dynamiques
   const products = await prisma.product.findMany({
     where: {
-      status: 'ACTIVE', // Seulement les produits actifs
+      isActive: true, // Seulement les produits actifs
     },
     select: {
       slug: true,

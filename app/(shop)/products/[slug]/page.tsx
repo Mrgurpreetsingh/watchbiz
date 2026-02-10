@@ -51,7 +51,7 @@ export async function generateStaticParams() {
   // Fetch tous les produits actifs pour pré-générer les pages
   const products = await prisma.product.findMany({
     where: {
-      status: 'ACTIVE', // Seulement les produits actifs
+      isActive: true, // Seulement les produits actifs
     },
     select: {
       slug: true,
