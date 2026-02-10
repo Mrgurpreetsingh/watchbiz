@@ -122,12 +122,8 @@ export function LoginForm() {
 
         <div className="text-sm">
           <a
-            href="#"
-            className="font-medium text-slate-900 hover:underline"
-            onClick={(e) => {
-              e.preventDefault()
-              alert('Fonctionnalité à venir')
-            }}
+            href="/forgot-password"
+            className="font-medium text-slate-900 dark:text-white hover:text-gold-champagne transition-colors"
           >
             Mot de passe oublié ?
           </a>

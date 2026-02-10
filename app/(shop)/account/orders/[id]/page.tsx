@@ -284,19 +284,34 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
               </div>
             </div>
 
-            {/* Tracking (if shipped) */}
-            {order.status === 'SHIPPED' && (
+            {/* Tracking (if shipped or delivered) */}
+            {(order.status === 'SHIPPED' || order.status === 'DELIVERED') && (
               <div className="mt-6 pt-6 border-t">
                 <div className="flex items-center gap-2 mb-3">
                   <Truck className="h-5 w-5 text-purple-600" />
-                  <h3 className="font-medium text-luxury-black">Suivi</h3>
+                  <h3 className="font-medium text-luxury-black">Suivi de livraison</h3>
                 </div>
 
                 <div className="bg-purple-50 border border-purple-200 rounded-lg p-3">
-                  <p className="text-sm text-purple-800">
-                    📦 Votre colis est en cours de livraison.
-                  </p>
-                  {/* TODO: Ajouter tracking number si disponible */}
+                  {order.trackingNumber ? (
+                    <>
+                      <p className="text-xs text-purple-700 mb-2">Numéro de suivi</p>
+                      <p className="font-mono font-semibold text-purple-900 text-sm break-all mb-2">
+                        {order.trackingNumber}
+                      </p>
+                      <p className="text-xs text-purple-700">
+                        {order.status === 'SHIPPED'
+                          ? '📦 Votre colis est en cours de livraison'
+                          : '✅ Votre colis a été livré'}
+                      </p>
+                    </>
+                  ) : (
+                    <p className="text-sm text-purple-800">
+                      {order.status === 'SHIPPED'
+                        ? '📦 Votre colis est en cours de livraison. Le numéro de suivi sera disponible prochainement.'
+                        : '✅ Votre colis a été livré.'}
+                    </p>
+                  )}
                 </div>
               </div>
             )}

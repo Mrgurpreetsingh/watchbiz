@@ -2,6 +2,7 @@ import { getAdminOrders } from '@/actions/admin-orders'
 import { Badge } from '@/components/ui/badge'
 import { SearchInput } from '@/components/admin/search-input'
 import { FilterSelect } from '@/components/admin/filter-select'
+import { ExportCSVButton } from '@/components/admin/export-csv-button'
 import { formatPrice } from '@/lib/utils'
 import { ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
@@ -80,13 +81,16 @@ export default async function AdminOrdersPage({ searchParams }: AdminOrdersPageP
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="font-heading text-4xl font-bold text-luxury-black mb-2">
-          Commandes
-        </h1>
-        <p className="text-slate-mid">
-          {orders.length} commande{orders.length > 1 ? 's' : ''} au total
-        </p>
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="font-heading text-4xl font-bold text-luxury-black mb-2">
+            Commandes
+          </h1>
+          <p className="text-slate-mid">
+            {orders.length} commande{orders.length > 1 ? 's' : ''} au total
+          </p>
+        </div>
+        <ExportCSVButton />
       </div>
 
       {/* Filters */}
@@ -169,6 +173,9 @@ export default async function AdminOrdersPage({ searchParams }: AdminOrdersPageP
                   <th className="text-left p-4 text-sm font-semibold text-luxury-black">
                     Articles
                   </th>
+                  <th className="text-left p-4 text-sm font-semibold text-luxury-black">
+                    Suivi
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y">
@@ -212,6 +219,13 @@ export default async function AdminOrdersPage({ searchParams }: AdminOrdersPageP
                     </td>
                     <td className="p-4 text-sm text-slate-mid">
                       {order.items.length} article{order.items.length > 1 ? 's' : ''}
+                    </td>
+                    <td className="p-4 text-sm">
+                      {order.trackingNumber ? (
+                        <span className="text-green-700 font-medium">✓</span>
+                      ) : (
+                        <span className="text-slate-mid">-</span>
+                      )}
                     </td>
                   </tr>
                 ))}

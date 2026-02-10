@@ -2,10 +2,11 @@ import { getAdminOrderById } from '@/actions/admin-orders'
 import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
 import { formatPrice } from '@/lib/utils'
-import { ArrowLeft, User, MapPin, Package, CreditCard } from 'lucide-react'
+import { ArrowLeft, User, MapPin, Package, CreditCard, Truck } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { OrderStatusUpdater } from '@/components/admin/order-status-updater'
+import { TrackingUpdater } from '@/components/admin/tracking-updater'
 
 /**
  * 📦 Admin Order Detail Page
@@ -214,6 +215,18 @@ export default async function AdminOrderDetailPage({ params }: AdminOrderDetailP
             </div>
 
             <OrderStatusUpdater orderId={order.id} currentStatus={order.status} />
+          </Card>
+
+          {/* Tracking Number */}
+          <Card className="p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <Truck className="h-5 w-5 text-gold-champagne" />
+              <h2 className="font-heading text-xl font-bold text-luxury-black">
+                Suivi de livraison
+              </h2>
+            </div>
+
+            <TrackingUpdater orderId={order.id} currentTracking={order.trackingNumber} />
           </Card>
 
           {/* Payment Info */}
