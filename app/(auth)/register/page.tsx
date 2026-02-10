@@ -30,26 +30,27 @@ export default function RegisterPage() {
   return (
     <PageTransition>
       <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8">
-      {/* Titre */}
-      <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-        Créer un compte
-      </h2>
-      <p className="text-slate-600 dark:text-slate-300 mb-6">
-        Rejoignez WatchBiz pour découvrir nos montres de luxe
-      </p>
+        {/* Titre */}
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+          Créer un compte
+        </h2>
+        <p className="text-slate-600 dark:text-slate-300 mb-6">
+          Rejoignez WatchBiz pour découvrir nos montres de luxe
+        </p>
 
-      {/* Formulaire d'inscription */}
-      <RegisterForm />
+        {/* Formulaire d'inscription */}
+        <RegisterForm />
 
-      {/* Lien vers connexion */}
-      <div className="mt-6 text-center text-sm text-slate-600 dark:text-slate-300">
-        Vous avez déjà un compte ?{' '}
-        <Link
-          href="/login"
-          className="font-medium text-slate-900 dark:text-white hover:underline"
-        >
-          Se connecter
-        </Link>
+        {/* Lien vers connexion */}
+        <div className="mt-6 text-center text-sm text-slate-600 dark:text-slate-300">
+          Vous avez déjà un compte ?{' '}
+          <Link
+            href="/login"
+            className="font-medium text-slate-900 dark:text-white hover:underline"
+          >
+            Se connecter
+          </Link>
+        </div>
       </div>
     </PageTransition>
   )

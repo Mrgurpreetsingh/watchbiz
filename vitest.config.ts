@@ -14,6 +14,13 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     setupFiles: ['./tests/setup/vitest.setup.ts'],
+    // Exclude Playwright E2E tests (*.spec.ts) - only run Vitest tests (*.test.ts)
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/tests/e2e/**', // Exclude all E2E tests
+      '**/*.spec.ts', // Exclude Playwright test files
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],

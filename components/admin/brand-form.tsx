@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { ImageUploader } from '@/components/admin/image-uploader'
 import { ArrowLeft, Loader2, Save } from 'lucide-react'
 import { createBrand, updateBrand } from '@/actions/admin-brands'
-import { toast } from 'sonner'
+import { useToast } from '@/lib/hooks/use-toast'
 import type { Brand } from '@prisma/client'
 
 /**
@@ -26,6 +26,7 @@ interface BrandFormProps {
 export function BrandForm({ brand, mode }: BrandFormProps) {
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
+  const { toast } = useToast()
 
   // Form state
   const [name, setName] = useState(brand?.name || '')
@@ -56,12 +57,12 @@ export function BrandForm({ brand, mode }: BrandFormProps) {
 
     // Validation basique
     if (!name.trim()) {
-      toast.error('Erreur', { description: 'Le nom de la marque est requis' })
+      toast.error( 'Le nom de la marque est requis')
       return
     }
 
     if (!slug.trim()) {
-      toast.error('Erreur', { description: 'Le slug est requis' })
+      toast.error( 'Le slug est requis')
       return
     }
 
@@ -83,23 +84,19 @@ export function BrandForm({ brand, mode }: BrandFormProps) {
 
         if (result.success) {
           toast.success(
-            mode === 'create' ? 'Marque créée' : 'Marque mise à jour',
-            {
-              description:
-                mode === 'create'
-                  ? 'La marque a été créée avec succès'
-                  : 'Les modifications ont été enregistrées'
-            }
+            mode === 'create'
+              ? 'La marque a été créée avec succès'
+              : 'Les modifications ont été enregistrées'
           )
 
           router.push('/admin/brands')
           router.refresh()
         } else {
-          toast.error('Erreur', { description: result.error || 'Une erreur est survenue' })
+          toast.error( result.error || 'Une erreur est survenue')
         }
       } catch (error) {
         console.error('Error submitting brand form:', error)
-        toast.error('Erreur', { description: 'Une erreur est survenue' })
+        toast.error( 'Une erreur est survenue')
       }
     })
   }
